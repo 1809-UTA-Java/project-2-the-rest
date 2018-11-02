@@ -37,6 +37,13 @@ public class Cheese {
 		Quantity = quantity;
 	}
 
+	public Cheese(int id, String name, int quantity) {
+		super();
+		Id = id;
+		Name = name;
+		Quantity = quantity;
+	}
+
 	@Override
 	public String toString() {
 		return "Cheese [Id=" + Id + ", Name=" + Name + ", Quantity=" + Quantity + "]";
