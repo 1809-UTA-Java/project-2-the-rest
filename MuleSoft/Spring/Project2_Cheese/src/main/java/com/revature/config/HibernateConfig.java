@@ -55,7 +55,7 @@ public class HibernateConfig {
 	}
 	
 	@Bean
-	public CheeseDao cheeseDao(SessionFactory sf){
+	public CheeseDao Dao(SessionFactory sf){
 		CheeseDao dao = new CheeseDao();
 		dao.setSessionFactory(sf);
 		return dao;
