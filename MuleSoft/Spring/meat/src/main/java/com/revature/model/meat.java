@@ -38,6 +38,12 @@ public class meat {
 	public void setAmmount(int ammount) {
 		this.stock = ammount;
 	}
+	public void subAmmount(int ammount) {
+		this.stock -= ammount;
+	}
+	public void addAmmount(int ammount) {
+		this.stock += ammount;
+	}
 	@Override
 	public String toString() {
 		return "meat [id=" + id + ", meat=" + type + ", calories=" + calories + ", ammount=" + stock + "]";
