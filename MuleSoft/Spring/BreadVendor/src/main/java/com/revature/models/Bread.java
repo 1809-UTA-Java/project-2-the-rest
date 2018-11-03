@@ -55,8 +55,12 @@ public class Bread {
 		return Stock;
 	}
 
-	public void setStock(int stock) {
-		Stock = stock;
+	public void setStock() {
+		Stock -= 1;
+	}
+	
+	public void restockStock() {
+		Stock = 10 ;
 	}
 
 	@Id

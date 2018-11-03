@@ -11,10 +11,7 @@ import com.revature.models.Bread;
 @Repository
 public interface BreadRepository extends JpaRepository<Bread,String>{
 
-	
-	
-
-/*Bread findByType(String type);
+Bread findByType(String type);
 	
 	public List<Bread> findByTypeLike(String type);
 	
@@ -26,5 +23,5 @@ public interface BreadRepository extends JpaRepository<Bread,String>{
 	
 	public List<Bread> findByTypeIgnoreCase(String type);
 
-}*/
+
 }
