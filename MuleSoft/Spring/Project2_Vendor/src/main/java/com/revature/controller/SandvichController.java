@@ -23,14 +23,9 @@ public class SandvichController {
 		return map;
 	}
 	
-	@RequestMapping( value="process", method=RequestMethod.POST)
+	@RequestMapping( value="process", method=RequestMethod.GET)
 	public ResponseEntity<Map<String, Integer>> process(@RequestBody String payload) throws Exception {
 		Map<String, Integer> map = parseString(payload);
 		return ResponseEntity.ok(map);
-	}
-	
-	@GetMapping(value="start")
-	public String redirect() {
-		return "redirect:/index.html";
 	}
 }
