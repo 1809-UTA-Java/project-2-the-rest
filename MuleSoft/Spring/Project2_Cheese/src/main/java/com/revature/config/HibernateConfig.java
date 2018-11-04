@@ -1,9 +1,8 @@
 package com.revature.config;
 
-import java.util.Properties;
-
 import javax.sql.DataSource;
 
+import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -11,14 +10,17 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
-import org.springframework.orm.hibernate4.HibernateTransactionManager;
-import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import com.revature.repository.CheeseDao;
 
 @Configuration
 @ComponentScan("com.revature")
 @EnableTransactionManagement
 @PropertySource("classpath:application.properties")
+
 public class HibernateConfig {
 
 	@Autowired
@@ -41,16 +43,21 @@ public class HibernateConfig {
 		sf.setDataSource(myDataSource());
 		sf.setPackagesToScan(new String[]{"com.revature"});
 		
-		Properties hb = new Properties();
-		hb.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
-		sf.setHibernateProperties(hb);
-		
 		return sf;
 	}
 	
 	@Bean
 	public HibernateTransactionManager transactionManager(SessionFactory sf){
+		HibernateTransactionManager htm = new HibernateTransactionManager();
+		htm.setSessionFactory(sf);
 		
-		
+		return htm;
+	}
+	
+	@Bean
+	public CheeseDao Dao(SessionFactory sf){
+		CheeseDao dao = new CheeseDao();
+		dao.setSessionFactory(sf);
+		return dao;
 	}
 }
