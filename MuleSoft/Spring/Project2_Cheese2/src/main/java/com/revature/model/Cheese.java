@@ -16,8 +16,8 @@ public class Cheese {
 	@Column(name = "Name")
 	String Name;
 	
-	@Column(name = "Quantity")
-	int Quantity;
+	@Column(name = "Stock")
+	int Stock;
 
 	public int getId() {
 		return Id;
@@ -35,19 +35,23 @@ public class Cheese {
 		Name = name;
 	}
 
-	public int getQuantity() {
-		return Quantity;
+	public int getStock() {
+		return Stock;
 	}
 
-	public void setQuantity(int quantity) {
-		Quantity = quantity;
+	public void setStock(int stock) {
+		Stock = stock;
+	}
+	
+	public void subStock(int amount){
+		Stock -= amount;
 	}
 
-	public Cheese(int id, String name, int quantity) {
+	public Cheese(int id, String name, int stock) {
 		super();
 		Id = id;
 		Name = name;
-		Quantity = quantity;
+		Stock = stock;
 	}
 
 	public Cheese() {
@@ -57,7 +61,7 @@ public class Cheese {
 
 	@Override
 	public String toString() {
-		return "Cheese [Id=" + Id + ", Name=" + Name + ", Quantity=" + Quantity + "]";
+		return "Cheese [Id=" + Id + ", Name=" + Name + ", Stock=" + Stock + "]";
 	}
 
 }

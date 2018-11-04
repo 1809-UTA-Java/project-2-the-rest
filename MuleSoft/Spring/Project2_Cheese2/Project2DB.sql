@@ -3,8 +3,8 @@ GRANT connect, resource, create session, create table, create view to Project2_C
 
 CREATE TABLE Cheese (
     Id INT Primary Key NOT NULL,
-    name VARCHAR2 (50) NOT NULL,
-    quantity INT
+    Name VARCHAR2 (50) NOT NULL,
+    Stock INT
 );
 
 INSERT INTO Cheese(Id, name, quantity) 
