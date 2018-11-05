@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:jms="http://www.mulesoft.org/schema/mule/jms" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
+    <http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="9000" doc:name="HTTP Listener Configuration"/>
+    <jms:activemq-connector name="Active_MQ" username="admin" password="admin" brokerURL="tcp://localhost:61616" validateConnections="true" doc:name="Active MQ"/>
+    <jms:activemq-connector name="Active_MQ1" username="admin" password="admin" brokerURL="tcp://localhost:61616" validateConnections="true" doc:name="Active MQ"/>
+    <http:request-config name="HTTP_Request_Configuration" host="localhost" port="7575" doc:name="HTTP Request Configuration"/>
+    <flow name="project2Flow">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/" doc:name="HTTP"/>
+        <set-session-variable variableName="Cheese" value="#[payload.getAll('cheese')]" doc:name="Cheese"/>
+        <choice doc:name="Choice">
+            <when expression="#[Cheese !='null'] ">
+                <foreach collection="Cheese" doc:name="For Each">
+                    <http:request config-ref="HTTP_Request_Configuration" path="/cheese/#[Cheese[counter]]" method="GET" doc:name="HTTP"/>
+                </foreach>
+            </when>
+        </choice>
+        <object-to-string-transformer doc:name="Object to String"/>
+        <jms:outbound-endpoint queue="project2" connector-ref="Active_MQ" doc:name="JMS"/>
+    </flow>
+    <flow name="project2Flow1">
+        <jms:inbound-endpoint queue="project2" connector-ref="Active_MQ1" doc:name="JMS"/>
+        <file:outbound-endpoint path="C:\Users\shawn\Desktop" outputPattern="sample" responseTimeout="10000" doc:name="File"/>
+    </flow>
+</mule>

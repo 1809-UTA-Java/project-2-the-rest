@@ -8,7 +8,7 @@ import com.revature.model.Cheese;
 @Repository
 public interface CheeseDao extends JpaRepository<Cheese, String>{
 	
-	Cheese findByName(String name);
+	Cheese findByName(String Name);
 
 	
 }

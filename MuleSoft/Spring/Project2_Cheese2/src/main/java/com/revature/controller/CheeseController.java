@@ -23,9 +23,17 @@ public class CheeseController {
 		return cheese;
 	}
 	
-	@Transactional
+/*	@Transactional
 	@GetMapping("/cheese/{name}")
-	public Cheese getByName(@PathVariable("name") String Name){
+	public Cheese getByName(@PathVariable("Name") String Name){
+		Cheese item = dao.findByName(Name);
+		item.subStock(1);
+		return item;
+	}*/
+	
+	@Transactional
+	@GetMapping("/cheese/{Name}")
+	public Cheese getByName(@PathVariable("Name") String Name){
 		Cheese item = dao.findByName(Name);
 		item.subStock(1);
 		return item;
