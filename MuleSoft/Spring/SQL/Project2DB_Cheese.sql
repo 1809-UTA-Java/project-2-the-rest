@@ -7,19 +7,14 @@ CREATE TABLE Cheese (
     Stock INT
 );
 
-INSERT INTO Cheese(Id, name, quantity) 
-    VALUES(11, 'Chedder', 50);
+INSERT INTO Cheese VALUES (11, 'Chedder', 50);
     
-INSERT INTO Cheese(Id, name, quantity) 
-    VALUES(22, 'Swiss', 20);
+INSERT INTO Cheese VALUES(22, 'Swiss', 20);
     
-INSERT INTO Cheese(Id, name, quantity) 
-    VALUES(33, 'Mozzarella', 10);
+INSERT INTO Cheese VALUES(33, 'Mozzarella', 10);
     
-INSERT INTO Cheese(Id, name, quantity) 
-    VALUES(44, 'Blue', 5);
+INSERT INTO Cheese VALUES(44, 'Blue', 5);
     
-INSERT INTO Cheese(Id, name, quantity) 
-    VALUES(55, 'Gouda', 2);
+INSERT INTO Cheese VALUES(55, 'Gouda', 2);
     
 commit;

@@ -1,4 +1,7 @@
-REATE TABLE breads(
+CREATE USER bread IDENTIFIED BY bread DEFAULT TABLESPACE users TEMPORARY TABLESPACE temp QUOTA 10M ON users;
+GRANT connect, resource, create session, create table, create view to bread;
+
+CREATE TABLE breads(
     id NUMBER NOT NULL,
     TYPE VARCHAR2(20) NOT NULL,
     CALORIES NUMBER(20) NOT NULL,
@@ -28,9 +31,4 @@ VALUES(5,'Grain Wheat',210,10);
 INSERT INTO breads(ID, TYPE, CALORIES,STOCK)
 VALUES(6,'Honey Oat',260,10);
 
-
-
-
-
-
-
+commit;

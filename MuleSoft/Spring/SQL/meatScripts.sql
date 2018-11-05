@@ -1,3 +1,6 @@
+CREATE USER meat IDENTIFIED BY meat DEFAULT TABLESPACE users TEMPORARY TABLESPACE temp QUOTA 10M ON users;
+GRANT connect, resource, create session, create table, create view to meat;
+
 CREATE TABLE meats(
    ID NUMBER NOT NULL,
    TYPE VARCHAR2(20) NOT NULL,
