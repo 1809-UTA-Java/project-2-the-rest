@@ -23,9 +23,8 @@ public class SandvichController {
 		return map;
 	}
 	
-	@RequestMapping( value="process", method=RequestMethod.GET)
-	public ResponseEntity<Map<String, Integer>> process(@RequestBody String payload) throws Exception {
-		Map<String, Integer> map = parseString(payload);
-		return ResponseEntity.ok(map);
+	@RequestMapping( value="process", method=RequestMethod.POST)
+	public String process(@RequestBody String payload) throws Exception {
+		return "redirect:/fortune-cookie.html";
 	}
 }

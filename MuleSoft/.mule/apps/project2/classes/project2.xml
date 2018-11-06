@@ -13,13 +13,42 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
     <jms:activemq-connector name="Active_MQ" username="admin" password="admin" brokerURL="tcp://localhost:61616" validateConnections="true" doc:name="Active MQ"/>
     <jms:activemq-connector name="Active_MQ1" username="admin" password="admin" brokerURL="tcp://localhost:61616" validateConnections="true" doc:name="Active MQ"/>
     <http:request-config name="HTTP_Request_Configuration" host="localhost" port="7575" doc:name="HTTP Request Configuration"/>
+    <http:request-config name="HTTP_Request_Configuration1" host="localhost" port="8320" doc:name="HTTP Request Configuration"/>
+    <http:request-config name="HTTP_Request_Configuration2" host="localhost" port="8082" doc:name="HTTP Request Configuration"/>
+    <http:request-config name="HTTP_Request_Configuration3" host="localhost" port="7798" doc:name="HTTP Request Configuration"/>
+    <http:request-config name="HTTP_Request_Configuration4" host="localhost" port="6776" doc:name="HTTP Request Configuration"/>
     <flow name="project2Flow">
         <http:listener config-ref="HTTP_Listener_Configuration" path="/" doc:name="HTTP"/>
         <set-session-variable variableName="Cheese" value="#[payload.getAll('cheese')]" doc:name="Cheese"/>
-        <choice doc:name="Choice">
-            <when expression="#[Cheese !='null'] ">
-                <foreach collection="Cheese" doc:name="For Each">
-                    <http:request config-ref="HTTP_Request_Configuration" path="/cheese/#[Cheese[counter]]" method="GET" doc:name="HTTP"/>
+        <set-session-variable variableName="vMeat" value="#[message.payload.getAll('meat')]" doc:name="Meat"/>
+        <set-session-variable variableName="vBread" value="#[message.payload.getAll('bread')]" doc:name="Bread"/>
+        <set-session-variable variableName="vPlant" value="#[message.payload.getAll('plant')]" doc:name="Plant"/>
+        <logger message="#[Cheese]" level="INFO" doc:name="Logger"/>
+        <choice doc:name="CheeseChoice">
+            <when expression="#[Cheese != empty] ">
+                <foreach collection="sessionVars.Cheese" doc:name="For Each">
+                    <http:request config-ref="HTTP_Request_Configuration" path="/cheese/#[Cheese[counter-1]]" method="GET" doc:name="HTTP"/>
+                </foreach>
+            </when>
+        </choice>
+        <choice doc:name="MeatChoice">
+            <when expression="#[vMeat != empty] ">
+                <foreach collection="vMeat" doc:name="For Each">
+                    <http:request config-ref="HTTP_Request_Configuration2" path="/meats/#[vMeat[counter-1]]" method="GET" doc:name="HTTP"/>
+                </foreach>
+            </when>
+        </choice>
+        <choice doc:name="BreadChoice">
+            <when expression="#[vBread != empty] ">
+                <foreach collection="vBread" doc:name="For Each">
+                    <http:request config-ref="HTTP_Request_Configuration3" path="/Bread/#[vBread[counter-1]]" method="GET" doc:name="HTTP"/>
+                </foreach>
+            </when>
+        </choice>
+        <choice doc:name="ProduceChoice">
+            <when expression="#[vPlant != empty] ">
+                <foreach collection="vPlant" doc:name="For Each">
+                    <http:request config-ref="HTTP_Request_Configuration4" path="/produce/id/#[vProduce[counter-1]]" method="GET" doc:name="HTTP"/>
                 </foreach>
             </when>
         </choice>
