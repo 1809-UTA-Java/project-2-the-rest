@@ -6,9 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.revature.model.Cheese;
 
 @Repository
-public interface CheeseDao extends JpaRepository<Cheese, String>{
-	
-	Cheese findByName(String Name);
-
-	
+public interface CheeseDao extends JpaRepository<Cheese, Integer>{
+	Cheese findByName(String name);
 }

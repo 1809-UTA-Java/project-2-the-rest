@@ -6,62 +6,41 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Cheese")
+@Table(name= "cheese")
 public class Cheese {
-
+	
 	@Id
 	@Column(name = "Id")
 	int Id;
-	
-	@Column(name = "Name")
-	String Name;
-	
-	@Column(name = "Stock")
-	int Stock;
-
+	String name;
+	int stock;
 	public int getId() {
 		return Id;
 	}
-
 	public void setId(int id) {
-		Id = id;
+		this.Id = id;
 	}
-
-	public String getName() {
-		return Name;
+	public String getCheese() {
+		return name;
 	}
-
-	public void setName(String name) {
-		Name = name;
+	public void setCheese(String cheese) {
+		this.name = cheese;
 	}
-
-	public int getStock() {
-		return Stock;
+	public int getAmmount() {
+		return stock;
 	}
-
-	public void setStock(int stock) {
-		Stock = stock;
+	public void setAmmount(int ammount) {
+		this.stock = ammount;
 	}
-	
-	public void subStock(int amount){
-		Stock -= amount;
+	public void subAmmount(int ammount) {
+		this.stock -= ammount;
 	}
-
-	public Cheese(int id, String name, int stock) {
-		super();
-		Id = id;
-		Name = name;
-		Stock = stock;
+	public void addAmmount(int ammount) {
+		this.stock += ammount;
 	}
-
-	public Cheese() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
 	@Override
 	public String toString() {
-		return "Cheese [Id=" + Id + ", Name=" + Name + ", Stock=" + Stock + "]";
+		return "Cheese [Id=" + Id + ", name=" + name + ", stock=" + stock + "]";
 	}
 
 }
