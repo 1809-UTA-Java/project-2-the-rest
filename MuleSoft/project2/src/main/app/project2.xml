@@ -57,6 +57,10 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
     </flow>
     <flow name="project2Flow1">
         <jms:inbound-endpoint queue="project2" connector-ref="Active_MQ1" doc:name="JMS"/>
+        <set-payload value="bread = #[vBread]
+cheese = #[cheese]
+meat = #[vMeat]
+plant = #[vPlant]" doc:name="Set Payload"/>
         <file:outbound-endpoint path="C:\Users\shawn\Desktop" outputPattern="sample" responseTimeout="10000" doc:name="File"/>
     </flow>
 </mule>

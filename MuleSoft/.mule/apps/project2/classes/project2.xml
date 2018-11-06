@@ -48,7 +48,7 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
         <choice doc:name="ProduceChoice">
             <when expression="#[vPlant != empty] ">
                 <foreach collection="vPlant" doc:name="For Each">
-                    <http:request config-ref="HTTP_Request_Configuration4" path="/produce/id/#[vProduce[counter-1]]" method="GET" doc:name="HTTP"/>
+                    <http:request config-ref="HTTP_Request_Configuration4" path="/produce/id/#[vPlant[counter-1]]" method="GET" doc:name="HTTP"/>
                 </foreach>
             </when>
         </choice>
